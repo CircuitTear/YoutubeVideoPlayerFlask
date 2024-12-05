@@ -1,9 +1,11 @@
 from flask import Flask, request, redirect, send_file
-import requests
+from flask_cors import CORS
 from pytubefix import YouTube
 import pytubefix
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "secret!"
+CORS(app)
 
 @app.route('/')
 def index():
@@ -15,7 +17,7 @@ def apivideo():
     if not url:
         return 'Missing url', 400
     try:
-        video = YouTube(url).streams.filter(file_extension="mp4").order_by('resolution').desc().first()
+        video = YouTube(url).streams.get_highest_resolution(progressive=True)
     except pytubefix.exceptions.AgeRestrictedError:
         return "Age restricted"
     except pytubefix.exceptions.VideoUnavailable:
