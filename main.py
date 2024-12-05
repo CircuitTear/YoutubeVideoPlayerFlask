@@ -22,7 +22,6 @@ def apivideo():
     except pytubefix.exceptions.RegexMatchError:
         return "could not find match for " + str(url)
     video = video["adaptiveFormats"][0]
-
     return redirect(video["url"])
 
 if __name__ == '__main__':
