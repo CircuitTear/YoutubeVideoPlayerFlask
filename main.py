@@ -15,7 +15,7 @@ def apivideo():
     if not url:
         return 'Missing url', 400
     try:
-        video = YouTube(url).streams.filter(progressive=True, file_extension="mp4").order_by('resolution').desc().first()
+        video = YouTube(url).streams.filter(file_extension="mp4").order_by('resolution').desc().first()
     except pytubefix.exceptions.AgeRestrictedError:
         return "Age restricted"
     except pytubefix.exceptions.VideoUnavailable:
