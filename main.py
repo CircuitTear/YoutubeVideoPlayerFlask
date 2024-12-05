@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, Response, send_file
+from flask import Flask, request, redirect, send_file
 import requests
 from pytubefix import YouTube
 import pytubefix
@@ -25,10 +25,7 @@ def apivideo():
     
     video.download(filename="temp.mp4")
 
-    with open("temp.mp4", "rb") as f:
-        videod = f.read()
-
-    return Response(videod, 200, mimetype="video/mp4")
+    return send_file("temp.mp4")
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080)
