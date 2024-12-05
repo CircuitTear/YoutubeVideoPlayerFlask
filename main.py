@@ -16,9 +16,9 @@ def apivideo():
     try:
         video = YouTube(url).streaming_data
     except pytubefix.exceptions.AgeRestrictedError:
-        return "this video is age restricted"
+        return "Age restricted"
     except pytubefix.exceptions.VideoUnavailable:
-        return "this video is is unavailable"
+        return "Video unavailable"
     except pytubefix.exceptions.RegexMatchError:
         return "could not find match for " + str(url)
     video = video["adaptiveFormats"][0]
