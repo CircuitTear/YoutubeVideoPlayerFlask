@@ -15,7 +15,7 @@ def index():
 def apivideo():
     url = request.args.get('url')
     if not url:
-        return 'Missing url', 400
+        return 'Missing URL', 400
     try:
         video = YouTube(url).streams.get_highest_resolution(progressive=True)
     except pytubefix.exceptions.AgeRestrictedError:
@@ -23,7 +23,7 @@ def apivideo():
     except pytubefix.exceptions.VideoUnavailable:
         return "Video unavailable"
     except pytubefix.exceptions.RegexMatchError:
-        return "could not find match for " + str(url)
+        return "Could not find match for " + str(url)
     
     video.download(filename="temp.mp4")
 
